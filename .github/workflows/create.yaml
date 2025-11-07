@@ -15,3 +15,19 @@ jobs:
 
       - name: run init
         run: terraform init
+
+      - name: AWS Credentials Configuration
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: run terraform plan
+        run: terraform plan
+
+      - name: run apply
+        run: terraform apply -auto-approve
+
+      - name: run destroy
+        run: terraform destroy -auto-approve
